@@ -132,14 +132,6 @@ public class PianoScreen extends JFrame implements ActionListener{
 				JDialog jd = new JDialog(new Help());
 			}
 		});
-//		
-//		JMenuItem mntmNewMenuItem = new JMenuItem("Basic Usage");
-//		mntmNewMenuItem.setFont(new Font("Source Code Pro", Font.PLAIN, 15));
-//		mnNewMenu.add(mntmNewMenuItem);
-//		
-//		JMenuItem mntmAbout = new JMenuItem("About");
-//		mntmAbout.setFont(new Font("Source Code Pro", Font.PLAIN, 15));
-//		mnNewMenu.add(mntmAbout);
 		return menuBar;
 	}
 	

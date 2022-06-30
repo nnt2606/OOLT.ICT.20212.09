@@ -1,14 +1,31 @@
 package Record;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
 import Note.KeyNote;
 import Sound.Sound;
 
 
 public class Record {
+	private String recordName;
 	private ArrayList<KeyNote> record = new ArrayList<KeyNote>();
 	private ArrayList<Sound> sound = new ArrayList<Sound>();
 	public Record() {
 		super();
+		this.recordName = "record";
+	}
+	
+	public Record(String name) {
+		super();
+		this.recordName = name;
+	}
+	
+	public void setRecordName(String name) {
+		this.recordName = name;
+	}
+	
+	public String getRecordName() {
+		return this.recordName;
 	}
 	
 	public void addRecord(KeyNote note,Sound type) {
@@ -33,9 +50,9 @@ public class Record {
 	public void playRecord() {
 		System.out.println(this.toString());
 		for(int i=0; i<record.size();i++) {
+			sound.get(i).play();
 			try {
-				sound.get(i).play();
-				Thread.sleep(5);
+				TimeUnit.SECONDS.sleep(1);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
