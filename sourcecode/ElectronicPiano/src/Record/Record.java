@@ -10,6 +10,7 @@ public class Record {
 	private String recordName;
 	private ArrayList<KeyNote> record = new ArrayList<KeyNote>();
 	private ArrayList<Sound> sound = new ArrayList<Sound>();
+	
 	public Record() {
 		super();
 		this.recordName = "record";
@@ -43,7 +44,9 @@ public class Record {
 		String str = "";
 		for(int i=0;i<record.size();i++) {
 			str += record.get(i).toString()+" ( "+sound.get(i).toString()+")     ";
+			str += "\n";
 		}
+		str += "End of record!";
 		return str;
 	}
 	
