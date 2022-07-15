@@ -21,9 +21,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import Note.Keyboard;
-import Record.Record;
-import Sound.Sound;
+
+import PianoComponent.Keyboard;
+
 import javax.swing.ButtonGroup;
 
 public class PianoScreen extends JFrame implements ActionListener{
@@ -41,7 +41,6 @@ public class PianoScreen extends JFrame implements ActionListener{
 	private Boolean recording = false;
 	private Record record;
 	
-
 	public PianoScreen() {
 		keyboard = new Keyboard();
 		Container frame = getContentPane();
@@ -192,30 +191,25 @@ public class PianoScreen extends JFrame implements ActionListener{
 					record = new Record();
 					recording = true;
 					btnRecord.setText("Recording...");
+					
 				}else if(recording ==true) {
-					System.out.println("Record done! Save the record!");
-					recording = false;
-					btnRecord.setText("New Record");
+					System.out.println("Recording...");
 				}
 			}
 		});
 		recordPane.add(btnRecord);
 		
-		JButton btnPause = new JButton("Pause");
+		JButton btnPause = new JButton("Stop");
 		btnPause.setFont(new Font("Source Code Pro", Font.PLAIN, 16));
 		btnPause.setBounds(10, 54, 157, 34);
 		btnPause.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(recording == true && btnRecord.getText() == "Recording...") {
-					System.out.println("Pause the record!");
+				if(recording == true) {
+					System.out.println("End of record!");
 					recording = false;
-					btnPause.setText("Pausing...");
-				}else if( recording == false && btnRecord.getText() == "Recording...") {
-					System.out.println("Continue record!");
-					recording = true;
-					btnPause.setText("Pause");
-				}else {
-					System.out.println("Not recording, cannot pause!");
+					btnRecord.setText("Record");
+				}else if( recording == false) {
+					System.out.println("Not recording!");
 				}
 			}
 		});
@@ -229,6 +223,7 @@ public class PianoScreen extends JFrame implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				if(recording == false) {
 					System.out.println("Play the record!");
+					//System.out.println(record.toString());
 					record.playRecord();
 				}else {
 					System.out.println("Recording.., can not play!");
@@ -242,8 +237,6 @@ public class PianoScreen extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		sound.setCurrenVolume(slider.getValue());
-		switch(command) {
-		default:
 			if(rdbtnPiano.isSelected()) {
 				sound = new PianoSound(command);
 				if(recording == true) record.addRecord(keyboard.getKeyNote(command), sound);
@@ -258,7 +251,6 @@ public class PianoScreen extends JFrame implements ActionListener{
 			}
 			sound.play();
 			System.out.println(keyboard.getKeyNote(command).toString()+" - "+sound.toString()+" ( "+ slider.getValue()+")");
-		}
 		
 	}
 }
